@@ -5,36 +5,42 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ExpenseTrackerApp {
 
-  public static void main(String[] args) {
-    
-    // Create MVC components
-    DefaultTableModel tableModel = new DefaultTableModel();
-    tableModel.addColumn("Serial");
-    tableModel.addColumn("Amount");
-    tableModel.addColumn("Category");
-    tableModel.addColumn("Date");
-    
+    public static void main(String[] args) {
 
-    
-    ExpenseTrackerView view = new ExpenseTrackerView(tableModel);
+        // Create MVC components
+        DefaultTableModel tableModel = new DefaultTableModel();
+        tableModel.addColumn("Serial");
+        tableModel.addColumn("Amount");
+        tableModel.addColumn("Category");
+        tableModel.addColumn("Date");
 
-    // Initialize view
-    view.setVisible(true);
+        ExpenseTrackerView view = new ExpenseTrackerView(tableModel);
 
-    // Handle add transaction button clicks
-    view.getAddTransactionBtn().addActionListener(e -> {
-      
-      // Get transaction data from view
-      double amount = view.getAmountField(); 
-      String category = view.getCategoryField();
+        // Initialize view
+        view.setVisible(true);
 
-      // Create transaction object
-      Transaction t = new Transaction(amount, category);
+        // Handle add transaction button clicks
+        view.getAddTransactionBtn().addActionListener(e -> {
 
-      // Call controller to add transaction
-      view.addTransaction(t);
-    });
+            // Get transaction data from view
+            double amount = view.getAmountField();
+            String category = view.getCategoryField();
 
-  }
+            // Validate both fields
+            if (!InputValidation.validateAmt(amount)) {
+                System.out.println("Amount entered is not valid!");
+                return;
+            }
+            if (!InputValidation.validateCategory(category)) {
+                System.out.println("Category entered is not valid!");
+                return;
+            }
 
+            // Create transaction object
+            Transaction t = new Transaction(amount, category);
+
+            // Call controller to add transaction
+            view.addTransaction(t);
+        });
+    }
 }
