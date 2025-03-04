@@ -40,3 +40,8 @@ Here are some examples of violating ```non-functional``` requirements:
 
 ## Understandibility
 For the understandability section, we will be inspecting your git log. You should include either the .git folder or else a gitLog.(pdf | txt).
+
+Supported features:
+- Adding transactions to the tracker with 2 fields - the amount and category of the transaction
+- Storing transactions sequentially with a serial number (order transaction was added)
+- Recording date and time of the transaction recording
